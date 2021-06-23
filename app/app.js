@@ -13,6 +13,10 @@ export class App {
   }
 
   init() {
+    this.reset();
+  }
+
+  reset() {
     this.board = new Board([...defaultTasks]);
     this.render();
   }
@@ -31,7 +35,7 @@ export class App {
     const board = this.board;
     const onToggleTaskDone = task => this.toggleTask(task);
     const onAddTask = title => this.addTask(title);
-    const onResetBoard = () => this.init();
+    const onResetBoard = () => this.reset();
 
     this.root.innerHTML = '';
     this.root.appendChild(renderBoard({ board, onToggleTaskDone }));
