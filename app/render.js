@@ -24,3 +24,13 @@ export function renderTask({ task, onToggleDone }) {
   labelElement.appendChild(titleElement);
   return labelElement;
 }
+
+export function renderAddTask({ onAddTask }) {
+  const buttonElement = document.createElement('button');
+  buttonElement.innerHTML = 'Add Task';
+  buttonElement.addEventListener('click', () => {
+    const title = prompt('New task title');
+    onAddTask(title);
+  });
+  return buttonElement;
+}
