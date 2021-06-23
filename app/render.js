@@ -25,12 +25,22 @@ export function renderTask({ task, onToggleDone }) {
   return labelElement;
 }
 
-export function renderAddTask({ onAddTask }) {
-  const buttonElement = document.createElement('button');
-  buttonElement.innerHTML = 'Add Task';
-  buttonElement.addEventListener('click', () => {
+export function renderActions({ onAddTask, onResetBoard }) {
+  const addTaskElement = document.createElement('button');
+  addTaskElement.innerHTML = 'Add Task';
+  addTaskElement.addEventListener('click', () => {
     const title = prompt('New task title');
-    onAddTask(title);
+    if (title) {
+      onAddTask(title);
+    }
   });
-  return buttonElement;
+
+  const resetBoardElement = document.createElement('button');
+  resetBoardElement.innerHTML = 'Reset';
+  resetBoardElement.addEventListener('click', () => onResetBoard());
+
+  const actionsElement = document.createElement('div');
+  actionsElement.append(addTaskElement);
+  actionsElement.append(resetBoardElement);
+  return actionsElement;
 }

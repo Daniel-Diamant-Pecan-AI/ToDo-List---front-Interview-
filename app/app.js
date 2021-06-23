@@ -1,5 +1,5 @@
 import { Task, Board } from './model';
-import { renderBoard, renderAddTask } from './render';
+import { renderBoard, renderActions } from './render';
 
 const defaultTasks = [
   new Task('Read the code'),
@@ -8,12 +8,12 @@ const defaultTasks = [
 ];
 
 export class App {
-  constructor() {
-    this.board = new Board([...defaultTasks]);
+  constructor(root) {
+    this.root = root;
   }
 
-  init(root) {
-    this.root = root;
+  init() {
+    this.board = new Board([...defaultTasks]);
     this.render();
   }
 
@@ -38,8 +38,9 @@ export class App {
     );
 
     this.root.appendChild(
-      renderAddTask({
-        onAddTask: title => this.addTask(title)
+      renderActions({
+        onAddTask: title => this.addTask(title),
+        onResetBoard: () => this.init()
       })
     );
   }
