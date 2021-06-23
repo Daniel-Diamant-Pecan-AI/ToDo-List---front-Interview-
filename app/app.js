@@ -36,7 +36,7 @@ export class App {
     this.root.innerHTML = '';
     const board = renderBoard({
       board: this.board,
-      onToggleDone: this.controls.toggleTask
+      onToggleTaskDone: this.controls.toggleTask
     });
     this.root.appendChild(board);
   }
