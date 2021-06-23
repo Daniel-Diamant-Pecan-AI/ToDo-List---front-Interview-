@@ -28,13 +28,12 @@ export class App {
   }
 
   render() {
-    this.root.innerHTML = '';
-
     const board = this.board;
     const onToggleTaskDone = task => this.toggleTask(task);
     const onAddTask = title => this.addTask(title);
     const onResetBoard = () => this.init();
 
+    this.root.innerHTML = '';
     this.root.appendChild(renderBoard({ board, onToggleTaskDone }));
     this.root.appendChild(renderActions({ onAddTask, onResetBoard }));
   }
