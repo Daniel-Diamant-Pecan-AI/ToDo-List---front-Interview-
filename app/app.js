@@ -2,9 +2,9 @@ import { Task, Board } from './model';
 import { renderBoard, renderActions } from './render';
 
 const defaultTasks = [
-  new Task('Read the code'),
-  new Task('Fix the bug'),
-  new Task('Join Pecan')
+  new Task('👓 Read the code'),
+  new Task('🔨 Fix the bug'),
+  new Task('🤝 Join Pecan')
 ];
 
 export class App {
@@ -31,10 +31,18 @@ export class App {
     this.render();
   }
 
+  moveTask(task, offset) {
+    const taskIndex = this.board.tasks.findIndex(t => task === t);
+    this.board.tasks.splice(taskIndex, 1);
+    this.board.tasks.splice(taskIndex + offset, 0, task);
+    this.render();
+  }
+
   render() {
     const boardElement = renderBoard({
       board: this.board,
-      onTaskIsDoneChange: (task, isDone) => this.setTaskIsDone(task, isDone)
+      onTaskIsDoneChange: (task, isDone) => this.setTaskIsDone(task, isDone),
+      onTaskMove: (task, offset) => this.moveTask(task, offset)
     });
 
     const actionsElement = renderActions({

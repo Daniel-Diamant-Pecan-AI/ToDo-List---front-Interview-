@@ -1,15 +1,16 @@
-export function renderBoard({ board, onTaskIsDoneChange }) {
+export function renderBoard({ board, onTaskIsDoneChange, onTaskMove }) {
   const listElement = document.createElement('div');
   listElement.className = 'board';
   board.tasks.forEach(task => {
     const onIsDoneChange = value => onTaskIsDoneChange(task, value);
-    const taskElement = renderTask({ task, onIsDoneChange });
+    const onMove = offset => onTaskMove(task, offset);
+    const taskElement = renderTask({ task, onIsDoneChange, onMove });
     listElement.appendChild(taskElement);
   });
   return listElement;
 }
 
-export function renderTask({ task, onIsDoneChange }) {
+export function renderTask({ task, onIsDoneChange, onMove }) {
   const boxElement = document.createElement('input');
   boxElement.type = 'checkbox';
   boxElement.checked = task.isDone;
@@ -18,11 +19,24 @@ export function renderTask({ task, onIsDoneChange }) {
   const titleElement = document.createElement('span');
   titleElement.innerHTML = task.title;
 
+  const moveUpElement = document.createElement('button');
+  moveUpElement.innerHTML = '⬆';
+  moveUpElement.addEventListener('click', () => onMove(-1));
+
+  const moveDownElement = document.createElement('button');
+  moveDownElement.innerHTML = '⬇';
+  moveDownElement.addEventListener('click', () => onMove(1));
+
   const labelElement = document.createElement('label');
-  labelElement.className = 'task ' + (task.isDone ? 'done' : '');
   labelElement.appendChild(boxElement);
   labelElement.appendChild(titleElement);
-  return labelElement;
+
+  const taskElement = document.createElement('div');
+  taskElement.className = 'task ' + (task.isDone ? 'done' : '');
+  taskElement.appendChild(labelElement);
+  taskElement.appendChild(moveUpElement);
+  taskElement.appendChild(moveDownElement);
+  return taskElement;
 }
 
 export function renderActions({ onAddTask, onResetBoard }) {

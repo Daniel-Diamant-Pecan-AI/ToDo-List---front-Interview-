@@ -10,21 +10,30 @@ body {
 .task {
   display: flex;
   margin-bottom: 10px;
+}
+
+.task > button {
+  margin-left: 10px;
+}
+
+.task > label {
+  flex-grow: 1;
+  display: flex;
   padding: 5px;
   background: #ddd;
   box-shadow: 0 1px 1px 0 #00000055;
   border-radius: 4px;
 }
 
-.task > input {
+.task > label > input {
   margin-right: 5px;
 }
 
-.task:hover {
+.task > label:hover {
   box-shadow: 0 1px 2px 0 #00000088;
 }
 
-.task.done {
+.task.done > label {
   background: #5000fa;
   color: white;
 }
