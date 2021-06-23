@@ -1,20 +1,30 @@
+body {
+  font-family: Arial;
+}
+
 .board {
   display: flex;
   flex-direction: column;
 }
 
 .task {
+  display: flex;
   margin-bottom: 10px;
   padding: 5px;
   background: #ddd;
-  box-shadow: 0 2px 2px 0 #00000055;
-  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 #00000055;
+  border-radius: 4px;
+}
+
+.task > input {
+  margin-right: 5px;
 }
 
 .task:hover {
-  box-shadow: 0 2px 3px 0 #00000088;
+  box-shadow: 0 1px 2px 0 #00000088;
 }
 
 .task.done {
-  background: rgb(138, 221, 138);
+  background: #5000fa;
+  color: white;
 }

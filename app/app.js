@@ -3,7 +3,7 @@ import { renderBoard, renderActions } from './render';
 
 const defaultTasks = [
   new Task('Read the code'),
-  new Task('Solve the problem'),
+  new Task('Fix the bug'),
   new Task('Join Pecan')
 ];
 
