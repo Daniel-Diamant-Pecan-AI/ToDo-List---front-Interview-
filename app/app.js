@@ -21,8 +21,8 @@ export class App {
     this.render();
   }
 
-  toggleTask(task) {
-    task.isDone = !task.isDone;
+  setTaskIsDone(task, isDone) {
+    task.isDone = isDone;
     this.render();
   }
 
@@ -32,13 +32,18 @@ export class App {
   }
 
   render() {
-    const board = this.board;
-    const onToggleTaskDone = task => this.toggleTask(task);
-    const onAddTask = title => this.addTask(title);
-    const onResetBoard = () => this.reset();
+    const boardElement = renderBoard({
+      board: this.board,
+      onTaskIsDoneChange: (task, isDone) => this.setTaskIsDone(task, isDone)
+    });
+
+    const actionsElement = renderActions({
+      onAddTask: title => this.addTask(title),
+      onResetBoard: () => this.reset()
+    });
 
     this.root.innerHTML = '';
-    this.root.appendChild(renderBoard({ board, onToggleTaskDone }));
-    this.root.appendChild(renderActions({ onAddTask, onResetBoard }));
+    this.root.appendChild(boardElement);
+    this.root.appendChild(actionsElement);
   }
 }

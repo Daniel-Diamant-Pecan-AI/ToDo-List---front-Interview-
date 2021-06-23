@@ -1,19 +1,19 @@
-export function renderBoard({ board, onToggleTaskDone }) {
+export function renderBoard({ board, onTaskIsDoneChange }) {
   const listElement = document.createElement('div');
   listElement.className = 'board';
   board.tasks.forEach(task => {
-    const onToggleDone = () => onToggleTaskDone(task);
-    const taskElement = renderTask({ task, onToggleDone });
+    const onIsDoneChange = value => onTaskIsDoneChange(task, value);
+    const taskElement = renderTask({ task, onIsDoneChange });
     listElement.appendChild(taskElement);
   });
   return listElement;
 }
 
-export function renderTask({ task, onToggleDone }) {
+export function renderTask({ task, onIsDoneChange }) {
   const boxElement = document.createElement('input');
   boxElement.type = 'checkbox';
   boxElement.checked = task.isDone;
-  boxElement.addEventListener('change', () => onToggleDone());
+  boxElement.addEventListener('change', e => onIsDoneChange(e.target.checked));
 
   const titleElement = document.createElement('span');
   titleElement.innerHTML = task.title;
