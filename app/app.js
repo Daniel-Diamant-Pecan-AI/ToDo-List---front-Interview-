@@ -30,18 +30,12 @@ export class App {
   render() {
     this.root.innerHTML = '';
 
-    this.root.appendChild(
-      renderBoard({
-        board: this.board,
-        onToggleTaskDone: task => this.toggleTask(task)
-      })
-    );
+    const board = this.board;
+    const onToggleTaskDone = task => this.toggleTask(task);
+    const onAddTask = title => this.addTask(title);
+    const onResetBoard = () => this.init();
 
-    this.root.appendChild(
-      renderActions({
-        onAddTask: title => this.addTask(title),
-        onResetBoard: () => this.init()
-      })
-    );
+    this.root.appendChild(renderBoard({ board, onToggleTaskDone }));
+    this.root.appendChild(renderActions({ onAddTask, onResetBoard }));
   }
 }
